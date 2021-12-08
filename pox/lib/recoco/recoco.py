@@ -22,6 +22,7 @@ from threading import Thread
 import select
 import traceback
 import sys
+import datetime
 import os
 import socket
 import pox.lib.util
@@ -1145,18 +1146,18 @@ class TestTask (BaseTask):
     def __init__ (self, *args, **kw):
       BaseTask.__init__(self, *args, **kw)
 
-    def run (self, a, b, st, inc = 1, sleep = 0):
+    def run (self, a, b, st, f, inc = 1, sleep = 0):
       n = a
       while n <= b:
         n+=inc
         yield Sleep(1)
         print("Task & Priority & Count:", self.id, self.priority, n)
-      timeToCompletion = datetime.datetime.now() - st
-      print(timeToCompletion)
-      f = open('performanceFile', 'a')
-      f.write("Task %s & Priority %s & Count %s: \n" % (self.id, self.priority, n))
-      f.write(str(timeToCompletion) + "\n")
-      f.close()
+      if(f):
+        timeToCompletion = datetime.datetime.now() - st
+        f = open('performanceFileOriginal', 'a')
+        f.write("Task %s & Priority %s & Count %s: \n" % (self.id, self.priority, n))
+        f.write(str(timeToCompletion) + "\n")
+        f.close()
 
 
 # Sanity tests

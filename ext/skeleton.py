@@ -77,8 +77,8 @@ def _go_up (event):
 def test1 ():
   dt = datetime.datetime.now()
   log.info(dt)
-  t0 = TestTask(0, 3, dt)
-  t1 = TestTask(100, 103, dt)
+  t0 = TestTask(0, 3, dt, False)
+  t1 = TestTask(100, 103, dt, True)
   t0.start()
   t1.start()
 
@@ -86,7 +86,7 @@ def test1 ():
 def test2 ():
   dt = datetime.datetime.now()
   log.info(dt)
-  t0 = TestTask(0, 3, dt)
+  t0 = TestTask(0, 3, dt, True)
   t0.start()
   
   
