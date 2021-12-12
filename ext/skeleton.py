@@ -49,49 +49,136 @@ def _go_up (event):
   # Event handler called when POX goes into up state
   # (we actually listen to the event in launch() below)
   log.info("Skeleton application ready (to do nothing).")
-  dt = datetime.datetime.now()
-  log.info(dt)
-  t0 = TestTask(0, 3, dt, False)
-  t1 = TestTask(100, 103, dt, False)
-  t2 = TestTask(200, 204, dt, False)
-  t3 = TestTask(300, 304, dt, False)
-  t4 = TestTask(400, 404, dt, False)
-  t5 = TestTask(500, 504, dt, False)
-  t6 = TestTask(600, 604, dt, False)
-  t7 = TestTask(700, 704, dt, False)
-  t8 = TestTask(800, 804, dt, False)
-  t9 = TestTask(900, 904, dt, True)
-  t0.start(priority=.9)
-  t1.start(priority=.8)
-  t2.start(priority=.7)
-  t3.start(priority=.6)
-  t4.start(priority=.5)
-  t5.start(priority=.4)
-  t6.start(priority=.3)
-  t7.start(priority=.2)
-  t8.start(priority=.1)
-  t9.start(priority=.01)
   test1()
-  test2()
+  # test2()
+  # test3()
+  # test4()
+  # test5()
+  # test6()
+  # test7()
+  # test8()
+  # test9()
+  # test10()
 
 def test1 ():
   dt = datetime.datetime.now()
-  log.info(dt)
-  t0 = TestTask(0, 3, dt, False)
-  t1 = TestTask(100, 103, dt, True)
+  t0 = TestTask(0, 4, dt, True)
   t0.start()
-  t1.start()
 
 
 def test2 ():
   dt = datetime.datetime.now()
-  log.info(dt)
-  t0 = TestTask(0, 3, dt, True)
-  t0.start()
-  
-  
+  t0 = TestTask(0, 4, dt, True)
+  t0.start(priority=.5)
 
 
+def test3 ():
+  dt = datetime.datetime.now()
+  t0 = TestTask(0, 4, dt, True)
+  t0.start(priority=.01)
+
+
+def test4 ():
+  dt = datetime.datetime.now()
+  t0 = TestTask(0, 4, dt, False)
+  t1 = TestTask(0, 4, dt, False)
+  t2 = TestTask(0, 4, dt, False)
+  t3 = TestTask(0, 4, dt, True)
+  t0.start(priority=.9)
+  t1.start(priority=.85)
+  t2.start()
+  t3.start(priority=.95)
+
+
+def test5 ():
+  dt = datetime.datetime.now()
+  t0 = TestTask(0, 4, dt, False)
+  t1 = TestTask(0, 4, dt, False)
+  t2 = TestTask(0, 4, dt, False)
+  t3 = TestTask(0, 4, dt, True)
+  t0.start(priority=.55)
+  t1.start(priority=.5)
+  t2.start(priority=.45)
+  t3.start(priority=.4)
+
+def test6 ():
+  dt = datetime.datetime.now()
+  t0 = TestTask(0, 4, dt, False)
+  t1 = TestTask(0, 4, dt, False)
+  t2 = TestTask(0, 4, dt, False)
+  t3 = TestTask(0, 4, dt, True)
+  t0.start(priority=.1)
+  t1.start(priority=.05)
+  t2.start(priority=.01)
+  t3.start(priority=.001)
+
+def test7 ():
+  tasks = []
+  priority = .95
+  for x in range(9):
+    dt = datetime.datetime.now()
+    tasks.append(TestTask(0, 4, dt, False))
+  tasks.append(TestTask(0, 4, dt, True))
+  for y in tasks:
+    y.start(priority=priority)
+    priority -= .1
+  
+def test8 ():
+  tasks = []
+  morehightasks = []
+  for x in range(10):
+    dt = datetime.datetime.now()
+    tasks.append(TestTask(0, 4, dt, False))
+  for x in range(4):
+    dt = datetime.datetime.now()
+    morehightasks.append(TestTask(0, 4, dt, False))
+  morehightasks.append(TestTask(0, 4, dt, True))
+  priority = .95
+  for y in tasks:
+    y.start(priority=priority)
+    priority -= .1
+  priority = .95
+  for y in morehightasks:
+    y.start(priority=priority)
+    priority -= .01
+
+def test9 ():
+  tasks = []
+  moremidtasks = []
+  for x in range(10):
+    dt = datetime.datetime.now()
+    tasks.append(TestTask(0, 4, dt, False))
+  for x in range(4):
+    dt = datetime.datetime.now()
+    moremidtasks.append(TestTask(0, 4, dt, False))
+  moremidtasks.append(TestTask(0, 4, dt, True))
+  priority = .95
+  for y in tasks:
+    y.start(priority=priority)
+    priority -= .1
+  priority = .52
+  for y in moremidtasks:
+    y.start(priority=priority)
+    priority -= .01
+
+def test10 ():
+  tasks = []
+  morelowtasks = []
+  for x in range(10):
+    dt = datetime.datetime.now()
+    tasks.append(TestTask(0, 4, dt, False))
+  for x in range(4):
+    dt = datetime.datetime.now()
+    morelowtasks.append(TestTask(0, 4, dt, False))
+  morelowtasks.append(TestTask(0, 4, dt, True))
+  priority = .95
+  for y in tasks:
+    y.start(priority=priority)
+    priority -= .1
+  priority = .06
+  for y in morelowtasks:
+    y.start(priority=priority)
+    priority -= .01
 
 
 @poxutil.eval_args
